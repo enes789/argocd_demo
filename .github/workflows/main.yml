@@ -5,7 +5,6 @@ name: CI
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
     inputs:
       input_environment:
         description: 'Input environment'
@@ -13,7 +12,16 @@ on:
         type: choice
         options:
         - DEV
-        - PROD  
+        - PROD
+  # workflow_dispatch:
+  #   inputs:
+  #     input_environment:
+  #       description: 'Input environment'
+  #       required: true 
+  #       type: choice
+  #       options:
+  #       - DEV
+  #       - PROD  
 # on:
 #   workflow_dispatch:
 #     branches:
@@ -46,7 +54,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: argocd:$(git rev-parse --short "$GITHUB_SHA")
+        tags: argocd:${{ github.sha }}
 
 
     # - name: Build, tag, and push image to Amazon ECR
