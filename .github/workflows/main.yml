@@ -3,17 +3,8 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
-    inputs:
-      input_environment:
-        description: 'Input environment'
-        required: true 
-        type: choice
-        options:
-        - DEV
-        - PROD
-  # workflow_dispatch:
+  # push:
+  #   branches: [ main ]
   #   inputs:
   #     input_environment:
   #       description: 'Input environment'
@@ -21,7 +12,16 @@ on:
   #       type: choice
   #       options:
   #       - DEV
-  #       - PROD  
+  #       - PROD
+  workflow_dispatch:
+    inputs:
+      input_environment:
+        description: 'Input environment'
+        required: true 
+        type: choice
+        options:
+        - DEV
+        - PROD  
 # on:
 #   workflow_dispatch:
 #     branches:
