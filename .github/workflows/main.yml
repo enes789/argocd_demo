@@ -39,12 +39,12 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/argocd:${{github.run_number}}
+        tags: ${{ secrets.DOCKER_USERNAME }}/argocd:${{github.run_number}}-${{ github.sha }}
    
     - name: Update Image Tag
       run: |
           image_tag=$(cat ./charts/helm-example/values.yaml | grep tag: | awk '{print $2}')
-          sed -i "s/$image_tag/${{github.run_number}}/" ./charts/helm-example/values.yaml
+          sed -i "s/$image_tag/${{github.run_number}}-${{ github.sha }}/" ./charts/helm-example/values.yaml
           
     - name: Commit and push changes
       uses: devops-infra/action-commit-push@v0.3
