@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   pullPolicy: IfNotPresent
   repository: enes789/argocd
-  tag: IMAGE_TAG
+  tag: 12
 
 imagePullSecrets: []
 nameOverride: ""
