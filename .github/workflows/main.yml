@@ -39,7 +39,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/argocd:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/argocd:${{github.run_number}}
 
 
     # - name: Build, tag, and push image to Amazon ECR
