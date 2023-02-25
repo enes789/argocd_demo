@@ -3,8 +3,9 @@
 name: CI
 
 on:
-  # push:
-  #   branches: [ main ]
+  push:
+    branches: [ main ]
+  # workflow_dispatch:
   #   inputs:
   #     input_environment:
   #       description: 'Input environment'
@@ -12,16 +13,7 @@ on:
   #       type: choice
   #       options:
   #       - DEV
-  #       - PROD
-  workflow_dispatch:
-    inputs:
-      input_environment:
-        description: 'Input environment'
-        required: true 
-        type: choice
-        options:
-        - DEV
-        - PROD  
+  #       - PROD  
 # on:
 #   workflow_dispatch:
 #     branches:
@@ -31,18 +23,11 @@ jobs:
   build:
     name: Building and Pushing the Image
     runs-on: ubuntu-latest
-    environment: ${{ inputs.input_environment }}
+    environment: DEV  ## ${{ inputs.input_environment }}
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    # - name: Configure AWS credentials
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Login to Docker Hub
       uses: docker/login-action@v2
@@ -54,7 +39,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: argocd:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/argocd:${{ github.sha }}
 
 
     # - name: Build, tag, and push image to Amazon ECR
