@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   pullPolicy: IfNotPresent
   repository: enes789/argocd
-  tag: 12
+  tag: 13
 
 imagePullSecrets: []
 nameOverride: ""
@@ -55,10 +55,10 @@ resources: {}
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
-  #   memory: 128Mi
+  #   memory: 138Mi
   # requests:
   #   cpu: 100m
-  #   memory: 128Mi
+  #   memory: 138Mi
 
 nodeSelector: {}
 
