@@ -2,18 +2,28 @@
 
 name: CI
 
-# on:
-#   push:
-#     branches: [ main ]
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
-    branches:
-    - main
-    
+    inputs:
+      input_environment:
+        description: 'Input environment'
+        required: true 
+        type: choice
+        options:
+        - DEV
+        - PROD  
+# on:
+#   workflow_dispatch:
+#     branches:
+#     - main
+
 jobs:
   build:
     name: Building and Pushing the Image
     runs-on: ubuntu-latest
+    environment: ${{ inputs.input_environment }}
 
     steps:
     - name: Checkout
